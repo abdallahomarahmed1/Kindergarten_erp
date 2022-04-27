@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% for darajat in darajat %}
+      <a href="{% url 'app:darajat_detail' darajat.id %}">{{darajat}}</a>
+      <a href="{% url 'app:add_darajat' %}" class="btn btn-primary">اضف</a>
+      <a href="{% url 'app:edit_darajat' darajat.id%}" class="btn btn-primary">عدل</a>
+
+{% endfor %}
+{% block body %}
+  <div class="container">
+    <h1>عدد الشهادات: <span class="text-info">{{count}}</span></h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <form class="col-6">
+        {% csrf_token %}
+        <table>{{filter.form.as_table}}</table>
+            <button type="submit" class="btn btn-primary">بحث</button>
+      </form>
+      <div class="col-6 text-end align-self-end">
+        <a href="{% url 'app:add_masrof' %}" class="btn btn-primary">أضف درجات</a>
+      </div>
+    </div>
+
+    
+
+  </div>
+    <table class="table container mt-3">
+        <thead>
+          <tr class="text-info">
+            <th scope="col">الاسم</th>
+            <th scope="col">التاريخ</th>
+            <th scope="col">تعديل</th>
+            <th scope="col">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            {% for darajat in darajat %}
+          <tr>
+            <th scope="row"><a href="{% url 'app:darajat_detail' darajat.id %}">{{darajat}}</a></th>
+            <td>{{darajat.add_date|date:"j/n/Y"}}</td>
+            <td><a href="{% url 'app:edit_darajat' darajat.id%}" class="btn btn-primary">تعديل</a></td>
+            <td><a href="{% url 'app:delete_darajat' darajat.id%}" class="btn btn-danger">حذف</a></td>
+          </tr>
+        {% endfor %}
+            
+        </tbody>
+      </table>
+      
+
+    <!-- <div class="container"> -->
+        {% if masrofs.has_other_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if masrofs.has_previous %}
+                <li class="page-item">
+                <a class="page-link" href="?page={{masrofs.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+            {% endif %}
+                {% for i in masrofs.paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+                {% if masrofs.has_next %}
+                    <li class="page-item">
+                    <a class="page-link" href="?page={{masrofs.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+    <!-- </div> -->
+
+    <div class="row">
+      <div class="col text-center">
+        <button onclick="window.print();" class="btn btn-primary col-4">طباعة الدرجات</button>
+      </div>
+    </div>
+  <!-- </div> -->
+ 
+{% endblock body %}

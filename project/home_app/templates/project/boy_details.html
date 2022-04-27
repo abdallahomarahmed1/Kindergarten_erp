@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container mt-4">
+    {% for boy in boy %}
+    <div class="row"> 
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">الإسم:<span class="text-info">{{boy.name}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">السن:<span class="text-info">{{boy.age}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">الفصل:<span class="text-info">{{boy.boy_class}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">الرقم القومي:<span class="text-info">{{boy.number_kawme}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">رقم الهاتف:<span class="text-info">{{boy.number_phone}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">التاريخ:<span class="text-info">{{boy.date|date:"j/n/Y"}}</span></h2>
+    <center>
+        {% if boy.image %}
+        <h2 class="col-xl-12"><img src="{{boy.image.url}}" class="img-responsive" height="250px" width="250px"></h2>
+        {% endif %}
+    </center>
+    </div>
+    <div class="row"> 
+        <div class="col-6"><a href="{% url 'app:Boy_edit'  boy.id %}" class="btn btn-primary">تعديل معلومات الطفل</a></div>
+        <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_boy'  boy.id %}" class="btn btn-danger">حذف معلومات الطفل</a></div>
+    </div>
+    {% endfor %}
+    
+</div>
+
+{% endblock %}

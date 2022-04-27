@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block body %}
+  <style>
+    @media print {
+      .navigation{
+        display: none;
+      }
+      .my_search {
+        display: none;
+      }
+      .btn {
+        display: none;
+      }
+      a{
+        text-decoration: none;
+      }
+    }
+  </style>
+  <div class="my_search">
+    <div class="container">
+      <h1>عدد التلاميذ: <span class="text-info">{{count}}</span></h1>
+    </div>
+    <div class="container">
+      <div class="row">
+          <form class="col-6">
+              {% csrf_token %}
+              <table>{{filter.form.as_table}}</table>
+                  <button type="submit" class="btn btn-primary ml-3 mt-3">بحث</button>
+        </form>
+        <div class="col-6 text-end align-self-end">
+          <a href="{% url 'app:add_boy' %}" class="btn btn-primary">اضف طالب</a>
+        </div>
+      </div>
+  </div>
+
+    
+
+  </div>
+    <table class="table container mt-3">
+        <thead>
+          <tr class="text-info">
+            <th scope="col">الاسم</th>
+            <th scope="col">السن</th>
+            <th scope="col">الفصل</th>
+            <th scope="col">رقم الهاتف</th>
+            <th scope="col">المبلغ المدفوع</th>
+            <th scope="col">تعديل</th>
+            <th scope="col">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+        {% for boys in boys %}
+          <tr>
+            <th scope="row"><a href="{% url 'app:Boy' boys.id %}" class="link-info">{{boys}}</a></th>
+            <td>{{boys.age}}</td>
+            <td>{{boys.boy_class}}</td>
+            <td>{{boys.number_phone}}</td>
+            <td>{{boys.paid}}</td>
+            <td><a class="btn btn-primary" href="{% url 'app:Boy_edit'  boys.id %}">تعديل</a></td>
+            <td><a class="btn btn-danger" href="{% url 'app:delete_boy'  boys.id %}">حذف</a></td>
+          </tr>
+        {% endfor %}
+          
+        </tbody>
+      </table>
+      
+
+    <!-- <div class="container"> -->
+        {% if boys.has_other_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if boys.has_previous %}
+                <li class="page-item">
+                <a class="page-link" href="?page={{boys.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+            {% endif %}
+                {% for i in boys.paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+                {% if boys.has_next %}
+                    <li class="page-item">
+                    <a class="page-link" href="?page={{boys.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+    <!-- </div> -->
+
+    <div class="row">
+      <div class="col text-center">
+        <button onclick="window.print();" id="ddds" class="btn btn-primary col-4">طباعة الطلاب</button>
+      </div>
+    </div>
+  <!-- </div> -->
+  {% endblock body %}

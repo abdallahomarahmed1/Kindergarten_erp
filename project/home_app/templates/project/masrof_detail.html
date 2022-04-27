@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    {% for masrof in masrof %}
+        <h1>{{masrof}}</h1>
+        <h1>{{masrof.price}}</h1>
+        <h1>{{masrof.date|date:"j/n/Y"}}</h1>
+        <a href="{% url 'app:delete_masrof'  masrof.id %}" class="btn btn-primary ml-3 mt-3"> حذف بيانات مصروف</a>
+        <a href="{% url 'app:edit_masrof' masrof.id %}" class="btn btn-primary ml-3 mt-3">عدل مصروفا</a>
+    {% endfor %}
+{% endblock body %}

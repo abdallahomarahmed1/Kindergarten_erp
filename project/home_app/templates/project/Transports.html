@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="container">
+    <h1>عدد الحافلات: <span class="text-info">{{count}}</span></h1>
+  </div>
+  <div class="container">
+    <div class="row">
+        <form class="col-6">
+            {% csrf_token %}
+            <table>{{filter.form.as_table}}</table>
+                <button type="submit" class="btn btn-primary ml-3 mt-3">بحث</button>
+      </form>
+      <div class="col-6 text-end align-self-end">
+        <a href="{% url 'app:add_transport' %}" class="btn btn-primary">اضف حافلة</a>
+      </div>
+    </div>
+</div>
+<table class="table container mt-3">
+    <thead>
+      <tr class="text-info">
+        <th scope="col">الرقم التعريفي</th>
+        <th scope="col">النوع</th>
+        <th scope="col">السائق</th>
+        <th scope="col">التاريخ</th>
+        <th scope="col">تعديل</th>
+        <th scope="col">حذف</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+    {% for Transports in Transports %}
+      <tr>
+        <th scope="row"><a href="{% url 'app:transports_detail' Transports.id %}" class="link-info">{{Transports}}</a></th>
+        <td>{{Transports.kind}}</td>
+        <td>{{Transports.driver}}</td>
+        <td>{{Transports.date|date:"j/n/Y"}}</td>
+        <td><a class="btn btn-primary" href="{% url 'app:edit_transport'  Transports.id %}">تعديل</a></td>
+        <td><a class="btn btn-danger" href="{% url 'app:delete_transport'  Transports.id %}">حذف</a></td>
+      </tr>
+    {% endfor %}
+      
+    </tbody>
+  </table>
+
+{% endblock body %}

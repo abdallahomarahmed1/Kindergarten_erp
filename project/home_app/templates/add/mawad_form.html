@@ -1,0 +1,13 @@
+{% extends 'base_add.html' %}
+{% block body %}
+{% load bootstrap4  %}
+ <div class="container">
+ <h1>اضف مادة</h1>
+ <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% comment %} <table>{{form.as_table}}</table> {% endcomment %}
+            <button type="submit" class="btn btn-primary mt-3">اضف</button>
+ </form>
+ </div>
+ {% endblock body %}

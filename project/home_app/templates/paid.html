@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+
+مجموع ما تم دفعه من التلاميذ: <span class="alert-primary">{{paid}}</span>
+<br>
+مجموع راتب العاملين في السنة: {{rateb}}
+<br>
+{{driver_rateb}}مجموع رواتب السائقين لهذه لسنة: 
+<br>
+مجموع المصروفات: {{masrof}}
+<br>
+صافي الربح: {{rebh}}
+{% comment %} {% endfor %} {% endcomment %}
+{% endblock body %}

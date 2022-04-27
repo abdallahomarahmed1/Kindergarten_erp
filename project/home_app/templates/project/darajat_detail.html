@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  <style>
+    table{
+      width: 100%;
+      border: 3px solid #17a2b8;
+    }
+    table td,th{
+      border: 2px solid #ccc;
+    }
+      @media print {
+        .navigation{
+          display: none;
+        }
+        .my_search {
+          display: none;
+        }
+        .btn {
+          display: none;
+        }
+        a{
+          text-decoration: none;
+        }
+      }
+  </style>
+    <div class="container mt-5">
+        <div style="border: 5px dashed rgb(17, 0, 255); padding:5px;" >
+            <div class="row">
+                <div class="col m-2" style="color:#dc3545;"><h1>مبروك</h1></div>
+                <div class="col m-2 text-center" style="color: #007bff;"><h1>شكر وتهنئة</h1></div>
+                <div class="col m-2 text-end" style="color:#dc3545;"><h1>النجاح</h1></div>
+            </div>
+            {% for darajat in darajat %}
+            <div class="row m-1">
+                <div class="col-5"><h3> <span style="color: rgb(17, 0, 255);">الإسم:</span><span style="color: rgba(255, 0, 0, 0.842);">{{darajat.name}}</span></h3></div>
+                <div class="col-4"><h3><span style="color: rgb(17, 0, 255);">مجموعة:</span><span style="color: rgba(255, 0, 0, 0.842);">{{darajat.name.boy_class}}</span></h3></div>
+                <div class="col"><h3><span style="color: rgb(17, 0, 255);">النسبة:</span><span style="color: rgba(255, 0, 0, 0.842);">100%</span></h3></div>
+            </div>
+            <div class="row m-2">
+                <table class="table" border="4">
+                  <tr align="center" style="background-color: #eee;font-weight: bold;">
+                    <th>المادة</th>
+                    <th>{{darajat.mada}}</th>
+                    <th>{{darajat.mada1}}</th>
+                    <th>{{darajat.mada2}}</th>
+                    <th>{{darajat.mada3}}</th>
+                    {% if darajat.mada4 != None %}
+                      <th>{{darajat.mada4}}</th>
+                    {% endif %}
+                    {% if darajat.mada5 != None %}
+                      <th>{{darajat.mada5}}</th>
+                    {% endif %}
+                    {% if darajat.mada6 != None %}
+                      <th>{{darajat.mada6}}</th>
+                    {% endif %}
+                    {% if darajat.mada7 != None %}
+                      <th>{{darajat.mada7}}</th>
+                    {% endif %}
+                    <th>مجموع</th>
+                  </tr>
+                  <tbody>
+                    <tr align="center">
+                      <td> النهائية</td>
+                      <td>{{darajat.mada.daraja}}</td>
+                      <td>{{darajat.mada1.daraja}}</td>
+                      <td>{{darajat.mada2.daraja}}</td>
+                      <td>{{darajat.mada3.daraja}}</td>
+                      {% if darajat.mada4 != None %}
+                      <td>{{darajat.mada4.daraja}}</td>
+                      {% endif %}
+                      {% if darajat.mada5 != None %}
+                        <td>{{darajat.mada5.daraja}}</td>
+                      {% endif %}
+                      {% if darajat.mada6 != None %}
+                        <td>{{darajat.mada6.daraja}}</td>
+                      {% endif %}
+                      {% if darajat.mada7 != None %}
+                        <td>{{darajat.mada7.daraja}}</td>
+                      {% endif %}
+                      <td class="total">{{darajat.total}}</td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr align="center">
+                        <td>درجة الطالب</td>
+                        <td>{{darajat.daraja}}</td>
+                        <td>{{darajat.daraja1}}</td>
+                        <td>{{darajat.daraja2}}</td>
+                        <td>{{darajat.daraja3}}</td>
+                        {% if darajat.mada4 != None %}
+                          <td>{{darajat.daraja4}}</td>
+                        {% endif %}
+                        {% if darajat.mada5 != None %}
+                          <td>{{darajat.daraja5}}</td>
+                        {% endif %}
+                        {% if darajat.mada6 != None %}
+                          <td>{{darajat.daraja6}}</td>
+                        {% endif %}
+                        {% if darajat.mada7 != None %}
+                          <td>{{darajat.daraja7}}</td>
+                        {% endif %}
+                        <td class="self_darajat">{{darajat.ejmale}}</td>
+                    </tr>
+                </tfoot>
+                </table>
+                <div class="align-content-center">
+                  <div class="row" style="align-items: center;">
+                    <div class="col-2"><img src="{% static 'img/image-removebg-preview.png' %}" alt="" srcset=""></div>
+                    <div class="col-2"><img src="{% static 'img/image-removebg-preview (1).png' %}" alt="" srcset=""></div>
+                    <div class="col-2"><img src="{% static 'img/image-removebg-preview (4).png' %}" alt="" srcset=""></div>
+                    <div class="col-2"><img src="img/image-removebg-preview.png" alt="" srcset=""></div>
+                    <div class="col"><h4><span style="color: rgb(17, 0, 255);">إشراف:</span><span style="color: rgba(255, 0, 0, 0.842);">أ/عمر أحمد محمد</span></h4></div>
+                  </div>
+                  {% comment %} </div>   {% endcomment %}
+                </div>  
+                {{darajat.nesba}}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="show"></div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <button onclick="window.print();" class="btn btn-primary col-4">طباعة الشهادة</button>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+        var nesba = 0;
+        var self_darajat = parseInt($('.self_darajat').text());
+        var total = parseInt($('.total').text());
+        console.log(self_darajat/total);
+      });
+    </script>
+{% endblock body %}

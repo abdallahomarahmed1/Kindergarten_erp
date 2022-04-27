@@ -1,0 +1,95 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proma</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.rtl.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="{% static 'js/jquery.js' %}"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  * {
+    font-family: 'Noto Sans Arabic', sans-serif;
+  }
+</style>
+</head>
+<body>
+  <div class="navbar navbar-expand-md bg-dark navbar-dark text-white">
+    <div class="container">
+        <a href="#" class="navbar-brand">Proma</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="mainmenu">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  إنشاء
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'app:add_boy' %}">طالب</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_techer' %}">معلم</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_class' %}">فصل</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_absence' %}">غائب</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_driver' %}">سائق</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_masrof' %}">مصروف</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_darajat' %}">درجات</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_subject' %}">مواد</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:add_transport' %}">وسيلة مواصلات</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  عرض
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'app:all_boys' %}">طالب</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:techeres' %}">معلم</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:class' %}">فصل</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:absence' %}">غائب</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:driveres' %}">سائق</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'app:masrofs' %}">مصروف</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:darajats' %}">درجات</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:subjects' %}">مواد</a></li>
+                  <li><a class="dropdown-item" href="{% url 'app:Transports' %}">وسيلة مواصلات</a></li>
+                </ul>
+              </li>
+                <li class="nav-item"><a href="{% url 'app:paid' %}" class="nav-link">الارباح</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link">تسجيل الخروج</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">حسابي</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+  
+    {% block body %}
+    
+    {% endblock body %}
+
+  <footer class="py-5 bg-dark text-white text-center position-relative mt-5">
+    <div class="container">
+        <p class="land">
+            Copyright &copy; 2021 Abdallah omar
+        </p>
+        <a href="#" class="position-absolute bottom-0 end-0 p-3">
+            <i class="bi bi-arrow-up-circle h2"></i>
+        </a>
+    </div>
+</footer>
+<script>
+      {% comment %} $(document).ready(function() {$('form table tbody tr th').first('lable').text('الإسم:')}); {% endcomment %}
+      
+</script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+
+
+</body>
+</html>
+

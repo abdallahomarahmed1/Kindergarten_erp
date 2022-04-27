@@ -1,0 +1,53 @@
+{% extends 'base_add.html' %}
+{% block body %}
+    <script>
+        $(document).ready(function() {
+            $('#id_name').select2();
+        });
+    </script>
+</head>
+<body>
+ <div class="container">
+ <h1>عدل شهادة</h1>
+ <form method="post" enctype="multipart/form-data">
+    {% load bootstrap4 %}
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div><a class="boxs" href="#">اظهار المزيد من المواد ▼</a></div>
+        <div><button type="submit" class="btn btn-primary mt-3">تعديل</button></div>
+ </form>
+ </div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#id_mada5').parent().hide();
+        $('#id_mada5').hide();
+        $('#id_daraja5').parent().hide();
+        $('#id_daraja5').hide();
+        $('#id_mada6').parent().hide();
+        $('#id_mada6').hide();
+        $('#id_daraja6').parent().hide();
+        $('#id_daraja6').hide();
+        $('#id_mada7').parent().hide();
+        $('#id_mada7').hide();
+        $('#id_daraja7').parent().hide();
+        $('#id_daraja7').hide();
+
+        $('.boxs').click(function(){
+            $('#id_mada5').parent().slideToggle();
+            $('#id_mada5').slideToggle();
+            $('#id_daraja5').parent().slideToggle();
+            $('#id_daraja5').slideToggle();
+            $('#id_mada6').parent().slideToggle();
+            $('#id_mada6').slideToggle();
+            $('#id_daraja6').parent().slideToggle();
+            $('#id_daraja6').slideToggle();
+            $('#id_mada7').parent().slideToggle();
+            $('#id_mada7').slideToggle();
+            $('#id_daraja7').parent().slideToggle();
+            $('#id_daraja7').slideToggle();
+        });
+    });
+</script>
+{% endblock body %}

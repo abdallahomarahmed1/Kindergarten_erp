@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container mt-4">
+    {% for subject in subject %}
+    <div class="row">
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">اسم المادة:</span>{{subject}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">الدرجة النهائية:</span>{{subject.daraja}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">التاريخ:</span>{{subject.date|date:"j/n/Y"}}</h2>
+    </div>
+    <div class="row mt-3 mb-3">
+        <div class="col-6"><a href="{% url 'app:edit_subject'  subject.id %}" class="btn btn-primary">تعديل مادة</a></div>
+        <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_subject'  subject.id %}" class="btn btn-danger">حذف مادة</a></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

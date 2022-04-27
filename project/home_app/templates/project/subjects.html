@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="container">
+    <h1>عدد المواد: <span class="text-info">{{count}}</span></h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <form class="col-6">
+        {% csrf_token %}
+        <table>{{filter.form.as_table}}</table>
+            <button type="submit" class="btn btn-primary">بحث</button>
+      </form>
+      <div class="col-6 text-end align-self-end">
+        <a href="{% url 'app:add_subject' %}" class="btn btn-primary">أضف مادة</a>
+      </div>
+    </div>
+
+    
+
+  </div>
+    <table class="table container mt-3">
+        <thead>
+          <tr class="text-info">
+            <th scope="col">الاسم</th>
+            <th scope="col">الدرجة العظمى</th>
+            <th scope="col">التاريخ</th>
+            <th scope="col">تعديل</th>
+            <th scope="col">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for subjects in subjects %}
+          
+            <th scope="row"><a href="{% url 'app:subject_detail' subjects.id %}">{{subjects}}</a></th>
+            <td>{{subjects.daraja}}</td>
+            <td>{{subjects.date|date:"j/n/Y"}}</td>
+            <td><a href="{% url 'app:edit_subject' subjects.id %}" class="btn btn-primary">تعديل</a></td>
+            <td><a href="{% url 'app:delete_subject'  subjects.id %}" class="btn btn-danger">حذف</a></td>
+          </tr>
+        {% endfor %}
+            
+        </tbody>
+      </table>
+      
+
+    <!-- <div class="container"> -->
+        {% if subjects.has_other_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if subjects.has_previous %}
+                <li class="page-item">
+                <a class="page-link" href="?page={{subjects.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+            {% endif %}
+                {% for i in subjects.paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+                {% if subjects.has_next %}
+                    <li class="page-item">
+                    <a class="page-link" href="?page={{subjects.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+    <!-- </div> -->
+
+    <div class="row">
+      <div class="col text-center">
+        <button onclick="window.print();" class="btn btn-primary col-4">طباعة المواد</button>
+      </div>
+    </div>
+  <!-- </div> -->
+ 
+{% endblock body %}

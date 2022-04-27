@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="container">
+    <h1>عدد المعلمين: <span class="text-info">{{count}}</span></h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <form class="col-6">
+        {% csrf_token %}
+        <table>{{filter.form.as_table}}</table>
+            <button type="submit" class="btn btn-primary">ابحث</button>
+      </form>
+      <div class="col-6 text-end align-self-end">
+        <a href="{% url 'app:add_techer' %}" class="btn btn-primary">اضف معلما</a>
+      </div>
+    </div>
+
+    
+
+  </div>
+    <table class="table container mt-3">
+        <thead>
+          <tr class="text-info">
+            <th scope="col">الاسم</th>
+            {% comment %} <th scope="col">الفصل</th> {% endcomment %}
+            <th scope="col">المؤهل</th>
+            <th scope="col">الرقم القومي</th>
+            <th scope="col">المرتب الشهري</th>
+            <th scope="col">رقم الهاتف</th>
+            <th scope="col">تعديل</th>
+            <th scope="col">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for teachers in teachers %}
+          <tr>
+            <th scope="row"><a href="{% url 'app:techer_detail' teachers.id %}" class="link-info">{{teachers}}</a></th>
+            {% comment %} <td>{{teachers.her_class}}</td> {% endcomment %}
+            <td>{{teachers.qualification}}</td>
+            <td>{{teachers.number_kawme}}</td>
+            <td>{{teachers.Salary}}</td>
+            <td>{{teachers.number_phone}}</td>
+            <td><a href="{% url 'app:edit_techer'  teachers.id %}" class="btn btn-primary">تعديل</a></td>
+            <td><a href="{% url 'app:delete_techer'  teachers.id %}" class="btn btn-danger">حذف</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+
+    <!-- <div class="container"> -->
+      {% if teachers.has_other_pages %}
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+          {% if teachers.has_previous %}
+              <li class="page-item">
+              <a class="page-link" href="?page={{teachers.previous_page_number}}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+              </a>
+              </li>
+          {% endif %}
+              {% for i in teachers.paginator.page_range %}
+                  <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+              {% endfor %}
+              {% if teachers.has_next %}
+                  <li class="page-item">
+                  <a class="page-link" href="?page={{teachers.next_page_number}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                  </a>
+                  </li>
+              {% endif %}
+          </ul>
+      </nav>
+  {% endif %}
+    <div class="row">
+      <div class="col text-center">
+        <button onclick="window.print()" id="ddds" class="btn btn-primary col-4">طباعة المعلمين</button>
+      </div>
+    </div>
+  <!-- </div> -->
+{% endblock %}

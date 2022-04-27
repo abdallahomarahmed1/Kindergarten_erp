@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <h1>عدد السائقين: <span class="text-info">{{count}}</span></h1>
+</div>
+<div class="container">
+  <div class="row">
+    <form class="col-6">
+      {% csrf_token %}
+      <table>{{filter.form.as_table}}</table>
+          <button type="submit" class="btn btn-primary ml-3 mt-3">بحث</button>
+    </form>
+    <div class="col-6 text-end align-self-end">
+      <a href="{% url 'app:add_driver' %}" class="btn btn-primary">أضف سائقا</a>
+    </div>
+  </div>
+
+  
+
+</div>
+  <table class="table container mt-3">
+      <thead>
+        <tr class="text-info">
+          <th scope="col">الاسم</th>
+            <th scope="col">الرقم القومي</th>
+            <th scope="col">رقم الهاتف</th>
+            <th scope="col">الراتب الشهري</th>
+          <th scope="col">تعديل</th>
+          <th scope="col">حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for driveres in driveres %}
+        <tr>
+          <th scope="row"><a href="{% url 'app:driver_detail' driveres.id %}" class="link-info">{{driveres}}</a></th>
+          <td>{{driveres.number_kawme}}</td>
+          <td>{{driveres.number_phone}}</td>
+          <td>{{driveres.Salary}}</td>
+          <td><a href="{% url 'app:edit_driver' driveres.id %}" class="btn btn-primary">تعديل</a></td>
+          <td><a href="{% url 'app:delete_driver' driveres.id %}" class="btn btn-danger">حذف</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+
+  <!-- <div class="container"> -->
+    {% if driveres.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        {% if driveres.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{driveres.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+        {% endif %}
+            {% for i in driveres.paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+            {% if driveres.has_next %}
+                <li class="page-item">
+                <a class="page-link" href="?page={{driveres.next_page_number}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+  <!-- </div> -->
+
+  <div class="row">
+    <div class="col text-center">
+      <button onclick="window.print();" class="btn btn-primary col-4">طباعة السائقين</button>
+    </div>
+  </div>
+<!-- </div> -->
+{% endblock body %}

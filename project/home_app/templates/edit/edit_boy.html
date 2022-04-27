@@ -1,0 +1,17 @@
+{% extends 'base_add.html' %}
+{% block body %}
+{% load bootstrap4  %}
+<script>
+    $(document).ready(function() {
+        $('#id_boy_class').select2();
+    });
+</script>
+ <div class="container">
+ <h1>عدل بيانات طالب</h1>
+ <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary mt-3">عدل</button>
+ </form>
+ </div>
+ {% endblock body %}
