@@ -1,20 +1,14 @@
 {% extends 'base_add.html' %}
 {% block body %}
-    <script>
-        $(document).ready(function() {
-            $('#id_teacher').select2();
-            console.log('fff');
-        });
-    </script>
-</head>
-<div class="container">
+
+<div class="container mt-3">
     <h1>اضف معلما</h1>
     <form method="post" enctype="multipart/form-data">
      {% load bootstrap4 %}
         {% csrf_token %}
         {% bootstrap_form form %}
         {% comment %} <table>{{form.as_table}}</table> {% endcomment %}
-            <button type="submit" class="btn btn-primary">اضف</button>
+            <button type="submit" class="btn btn-primary mt-3">اضف</button>
  </form>
  </div>
  {% endblock body %}

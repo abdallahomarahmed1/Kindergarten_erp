@@ -1,16 +1,19 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'short_base.html' %}
 {% block body %}
+<div class="container mt-4">
     {% for driver in driver %}
-        <h1>{{driver}}</h1>
-        <h1>{{driver.number_kawme}}</h1>
-        <h1>{{driver.number_phone}}</h1>
-        <h1>{{driver.Salary}}</h1>
-        <h1>{{driver.image}}</h1>
-        {{driver.date|date:"j/n/Y"}}
-        <a href="{% url 'app:edit_driver' driver.id %}" class="btn btn-primary ml-3 mt-3 mb-3" >عدل بيانات سائقا</a>
+    <div class="row">
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الإسم:</span>{{driver}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الرقم القومي:</span>{{driver.number_kawme}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الراتب:</span>{{driver.Salary}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">رقم الهاتف:</span>{{driver.number_phone}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">التاريخ:</span>{{driver.date|date:"j/n/Y"}}</h2>
+    </div>
+    <div class="row" style="margin-top: 300px;"> 
+        <div class="col-6"><a href="{% url 'app:edit_driver'  driver.id %}" class="btn btn-primary">تعديل السائق</a></div>
+        <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_driver'  driver.id %}" class="btn btn-danger">حذف السائق</a></div>
+    </div>
+</div>
 
-    {% endfor %}
-</body>
-</html>
-{% endblock body %}
+{% endfor %}
+{% endblock %}

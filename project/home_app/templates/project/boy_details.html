@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'short_base.html' %}
 {% block body %}
 <div class="container mt-4">
     {% for boy in boy %}
@@ -15,7 +15,7 @@
         {% endif %}
     </center>
     </div>
-    <div class="row"> 
+    <div class="row" style="margin-top: 340px;"> 
         <div class="col-6"><a href="{% url 'app:Boy_edit'  boy.id %}" class="btn btn-primary">تعديل معلومات الطفل</a></div>
         <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_boy'  boy.id %}" class="btn btn-danger">حذف معلومات الطفل</a></div>
     </div>

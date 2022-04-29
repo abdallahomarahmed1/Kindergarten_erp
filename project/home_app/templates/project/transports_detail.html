@@ -1,8 +1,17 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'short_base.html' %}
 {% block body %}
-{% for traansport in traansport %}
-    {{traansport}}
-
-{% endfor %}
-{% endblock body %}
+<div class="container mt-4">
+    {% for traansport in traansport %}
+    <div class="row">
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">النوع : </span>{{traansport.kind}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">السائق: </span>{{traansport.driver}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">الرقم التعريفي: </span>{{traansport.number}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">التاريخ:</span>{{traansport.date|date:"j/n/Y"}}</h2>
+    </div>
+    <div class="row" style="margin-top: 330px;">
+        <div class="col-6"><a href="{% url 'app:edit_transport'  traansport.id %}" class="btn btn-primary">تعديل وسيلة مواصلات</a></div>
+        <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_transport'  traansport.id %}" class="btn btn-danger">حذف وسيلة مواصلات</a></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

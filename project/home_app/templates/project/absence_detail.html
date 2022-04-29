@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'short_base.html' %}
 {% block body %}
 <div class="container mt-4">
     {% for absence in absence %}
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الإسم:</span>{{absence.name}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">بعذر:</span>{{absence.excuse}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">التاريخ:</span>{{absence.created|date:"j/n/Y"}}</h2>
-        <div class="row"> 
-            <div class="col-6"><a href="{% url 'app:edit_absence'  absence.id %}" class="btn btn-primary">تعديل معلومات الطفل</a></div>
-            <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_absences'  absence.id %}" class="btn btn-danger">حذف معلومات الطفل</a></div>
+        <div class="row" style="margin-top: 290px;"> 
+            <div class="col-6"><a href="{% url 'app:edit_absence'  absence.id %}" class="btn btn-primary">تعديل معلومات الغائب</a></div>
+            <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_absences'  absence.id %}" class="btn btn-danger">حذف معلومات الغائب</a></div>
         </div>
     {% endfor %}
 </div>

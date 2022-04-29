@@ -312,7 +312,7 @@ def paid_chart(request):
         'total':total,
         'profits':profits,
     }
-    return render(request,'charts.html',context)
+    return render(request,'paid.html',context)
 @login_required
 def profile(request):
     profile = Profile.objects.get(user=request.user)

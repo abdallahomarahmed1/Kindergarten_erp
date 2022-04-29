@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'short_base.html' %}
 {% block body %}
 <div class="container mt-4">
     {% for techer in techer %}
@@ -12,7 +12,7 @@
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-5"><span class="text-info">رقم الهاتف:</span>{{techer.number_phone}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-3"><span class="text-info">التاريخ:</span>{{techer.date|date:"j/n/Y"}}</h2>
     </div>
-    <div class="row"> 
+    <div class="row" style="margin-top: 300px;"> 
         <div class="col-6"><a href="{% url 'app:edit_techer'  techer.id %}" class="btn btn-primary">تعديل بانات المعلم</a></div>
         <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_techer'  techer.id %}" class="btn btn-danger">حذف المعلم</a></div>
     </div>

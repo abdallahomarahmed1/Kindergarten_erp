@@ -1,14 +1,15 @@
 {% extends 'base_add.html' %}
 {% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#id_boy_class').select2();
         });
     </script>
-</head>
-<body>
  <div class="container">
- <h1>اضف طالبا</h1>
+ <h1><center> اضف طالبا</center></h1>
  <form method="post" enctype="multipart/form-data">
     {% load bootstrap4 %}
         {% csrf_token %}

@@ -1,14 +1,298 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
+<link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        {% for techers in techers %}
+            {% if techers.rateb != None %}
+                <p class="total_piads_techer">{{techers.rateb}}</p>
+            {% endif %}
+        {% endfor %}
+        {% for drivers in drivers %}
+            {% if drivers.rateb != None %}
+                <p class="total_piad_drivers">{{drivers.rateb}}</p>
+            {% endif %}
+        {% endfor %}
+        {% for masrofs in masrofs %}
+            {% if masrofs.price != None %}
+                <p class="total_piad_masrofs">{{masrofs.price}}</p>
+            {% endif %}
+        {% endfor %}
+        <!--الاحصائيات-->
+        <div class="content mt-5 container">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                        <h3 id="total_piads" class="card-title">اجمالي المصروفات </h3>     
+                        <p class="hide_val"></p>               
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <div class="d-flex">
+                        <p class="d-flex flex-column">
+                        <span id="total_piad" class="text-bold text-lg"></span>
+                        <span id="total_piad_driver" class="text-bold text-lg"></span>
+                        <span id="total_piad_masrof" class="text-bold text-lg"></span>
+                        </p>  
+                    </div>
 
-مجموع ما تم دفعه من التلاميذ: <span class="alert-primary">{{paid}}</span>
-<br>
-مجموع راتب العاملين في السنة: {{rateb}}
-<br>
-{{driver_rateb}}مجموع رواتب السائقين لهذه لسنة: 
-<br>
-مجموع المصروفات: {{masrof}}
-<br>
-صافي الربح: {{rebh}}
-{% comment %} {% endfor %} {% endcomment %}
+                    <div class="d-flex">
+                        <p class="d-flex flex-column">
+                        {% comment %} <span id="total_piad_driver" class="text-bold text-lg"></span> {% endcomment %}
+                        </p>  
+                    </div>
+                    <!-- /.d-flex -->
+
+                    <div class="position-relative mb-4">
+                        <canvas id="visitors-chart" height="200"></canvas>
+                    </div>  
+                    </div>
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- /.col-md-6 -->
+                {% for boys in boys %}
+                    {% if boys.paid != None %}
+                        <p class="total_price">{{boys.paid}}</p>
+                    {% endif %}
+                {% endfor %}
+                <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">الارباح: {{profits}}</h3>   
+                        <p class="total_paid_chart"></p>   
+                    </div>
+                    </div>    
+                    <div class="card-body">
+                    <div class="d-flex">
+                        <p class="d-flex flex-column">
+                        <span id="totalsalarys" class="text-bold text-lg"></span><br></p>
+                    </div>
+                    <!-- /.d-flex -->
+    
+                    <div class="position-relative mb-4">
+                        <canvas id="sales-chart" height="160"></canvas>
+                    </div>
+    
+                    <div class="d-flex flex-row justify-content-end">
+                        <span style="margin-right: 30px;">
+                          <i class="fas fa-square text-gray"></i> اجمالي المصاريف
+                        </span>
+                        <span style="margin-left: 100px; margin-right: 45px;">
+                          <i class="fas fa-square text-primary"></i> إجمالي الدخل
+                        </span>
+
+                      </div>
+                    </div>
+                </div>
+                </div>
+            
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+    
+            <!-- form add books -->
+            
+    
+            <!-- ./wrapper -->
+            
+            
+        </div>
+    </div>
+   
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script>
+    $(document).ready(function(){
+        $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+        });
+    /*here i will make loop for get id category and status for contact with books */
+    /*حساب اجمالي الارباح و هي عبارة عن حاصل جمع سعر الكتب عند البيع بالاضافة الى سعر استعارة الكتاب*/
+    });
+    </script>
+
+    <script>
+    
+    
+
+    $(function () {
+    'use strict'
+    
+    var ticksStyle = {
+        fontColor: '#495057',
+        fontStyle: 'bold'
+    }
+
+    var mode      = 'index'
+    var intersect = true
+
+    var $salesChart = $('#sales-chart')
+
+    var salesChart  = new Chart($salesChart, {
+
+        type   : 'bar',
+        
+        data   : {
+
+        labels  : [
+            
+
+            'تفاصيل الارباح',
+
+        ],
+
+
+        datasets: [
+            {
+            backgroundColor: '#007bff',
+            borderColor    : '#007bff',
+            data           : [ 
+                {{total}}
+            ]
+            },
+            {
+            backgroundColor: '#ced4da',
+            borderColor    : '#ced4da',
+            data           : [ 
+                {{paids}}
+            ]
+            }
+        ]
+        },
+
+    
+    
+    options: {
+        maintainAspectRatio: false,
+        tooltips           : {
+            mode     : mode,
+            intersect: intersect
+        },
+        hover              : {
+            mode     : mode,
+            intersect: intersect
+        },
+        legend             : {
+            display: false
+        },
+        scales             : {
+            yAxes: [{
+            // display: false,
+            gridLines: {
+                display      : true,
+                lineWidth    : '4px',
+                color        : 'rgba(0, 0, 0, .2)',
+                zeroLineColor: 'transparent'
+            },
+            ticks    : $.extend({
+                beginAtZero: true,
+
+                // Include a dollar sign in the ticks
+                callback: function (value, index, values) {
+                if (value >= 1000) {
+                    value /= 1000
+                    value += 'k'
+                }
+                return value
+                }
+            }, ticksStyle)
+            }],
+            xAxes: [{
+            display  : true,
+            gridLines: {
+                display: false
+            },
+            ticks    : ticksStyle
+            }]
+        }
+        }
+    });
+    
+    var pieChart = document.getElementById('visitors-chart').getContext('2d')
+
+    var myPieChart = new Chart(pieChart, {
+        type: 'pie',
+        data: {
+        datasets: [{
+            data: ['{{total_masrofs}}','{{total_techers}}','{{total_drivers}}'],
+            backgroundColor :["#27c100","#f3545d","#fdaf4b"],
+            borderWidth: 10,
+            
+        }],
+        labels: ['المشتريات', 'مرتبات المعلمين', 'مرتبات السائقين'] 
+        },
+        options : {
+        responsive: true, 
+        maintainAspectRatio: false,
+        legend: {
+            position : 'bottom',
+            labels : {
+            fontColor: '#000',
+            fontSize: 15,
+            usePointStyle : true,
+            padding:30
+            }
+        },
+        pieceLabel: {
+            render: 'percentage',
+            fontColor: 'white',
+            fontSize: 14,
+        },
+
+
+        }
+    })
+
+    })
+
+
+    
+    </script>
+<script>
+    $(document).ready(function(){
+        // مجموع ما استلامه من الطلاب
+        var total = 0;
+        $('.total_price').each(function(){
+        $(this).hide();
+        var salary = $(this).text();
+        total += parseInt(salary);
+        });
+        $('#totalsalarys').text( "مجوع ما تم دفعه: " + total);
+        // مجموع ما تم دفعة للمعلمين
+        var total_piad = 0;
+        $('.total_piads_techer').each(function(){
+        $(this).hide();
+        var salary1 = $(this).text();
+        total_piad += parseInt(salary1);
+        });
+        $('#total_piad').text( "مجوع ما تم دفعه للمعلمين:" + total_piad + " ، ");
+        // مجموع ما تم دفعه للسائقين
+        var total_piad_drivers = 0;
+        $('.total_piad_drivers').each(function(){
+        $(this).hide();
+        var salary2 = $(this).text();
+        total_piad_drivers += parseInt(salary2);
+        });
+        $('#total_piad_driver').text( " مجوع ما تم دفعه للسائقين: " + total_piad_drivers);
+        // مجوع ما تم دفعة للمصرفات
+        var total_piad_masrofs = 0;
+        $('.total_piad_masrofs').each(function(){
+        $(this).hide();
+        var salary3 = $(this).text();
+        total_piad_masrofs += parseInt(salary3);
+        });
+        $('#total_piad_masrof').text( "مجوع ما تم دفعه للمصروفات: " + total_piad_masrofs);
+        total_piads = total_piad + total_piad_drivers + total_piad_masrofs;
+        console.log(total_piads);
+        $('#total_piads').text('اجمالي المدفوعات: '+ total_piads);
+    });
+    </script>
 {% endblock body %}

@@ -1,7 +1,10 @@
-{% extends 'base_add.html' %}
+{% extends 'short_base.html' %}
 {% block body %}
 {% load bootstrap4  %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+ 
     <script>
         $(document).ready(function() {
             $('#id_name').select2();
@@ -10,8 +13,8 @@
 
 </head>
 <body>
- <div class="container">
- <h1>اضف غائبا</h1>
+ <div class="container mt-3">
+ <h1><center> اضف غائبا</center></h1>
  <form method="post" enctype="multipart/form-date">
         {% csrf_token %}
         {% bootstrap_form form %}

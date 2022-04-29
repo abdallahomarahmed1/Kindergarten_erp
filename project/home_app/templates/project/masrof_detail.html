@@ -1,11 +1,14 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'short_base.html' %}
 {% block body %}
+<div class="container mt-5">
     {% for masrof in masrof %}
-        <h1>{{masrof}}</h1>
-        <h1>{{masrof.price}}</h1>
-        <h1>{{masrof.date|date:"j/n/Y"}}</h1>
-        <a href="{% url 'app:delete_masrof'  masrof.id %}" class="btn btn-primary ml-3 mt-3"> حذف بيانات مصروف</a>
-        <a href="{% url 'app:edit_masrof' masrof.id %}" class="btn btn-primary ml-3 mt-3">عدل مصروفا</a>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الإسم: </span>{{masrof.name}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">السعر:</span>{{masrof.price}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">التاريخ:</span>{{masrof.date|date:"j/n/Y"}}</h2>
+        <div class="row" style="margin-top: 280px;"> 
+            <div class="col-6"><a href="{% url 'app:edit_masrof'  masrof.id %}" class="btn btn-primary">تعديل المصروف</a></div>
+            <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_masrof'  masrof.id %}" class="btn btn-danger">حذف المصروف</a></div>
+        </div>
     {% endfor %}
-{% endblock body %}
+</div>
+{% endblock %}
