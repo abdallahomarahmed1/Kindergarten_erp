@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 {% block body %}
-  <div class="container">
+  <style>
+    @media print {
+      .navigation{
+        display: none;
+      }
+      .dis {
+        display: none;
+      }
+      .btn {
+        display: none;
+      }
+      a{
+        text-decoration: none;
+      }
+    }
+  </style>
+<div class="dis">
+  <div class="container ">
     <h1>عدد الفصول: <span class="text-info">{{count}}</span></h1>
   </div>
-  <div class="container">
+  <div class="container ">
     <div class="row">
       <form class="col-6">
         {% csrf_token %}
@@ -14,18 +31,16 @@
         <a href="{% url 'app:add_class' %}" class="btn btn-primary">اضف فصلا</a>
       </div>
     </div>
-
-    
-
   </div>
+</div>
     <table class="table container mt-3">
         <thead>
           <tr class="text-info">
             <th scope="col">اسم الفصل</th>
             <th scope="col">المعلم</th>
             <th scope="col">تاريخ اضافة الفصل</th>
-            <th scope="col">تعديل</th>
-            <th scope="col">حذف</th>
+            <th scope="col" class="dis">تعديل</th>
+            <th scope="col" class="dis">حذف</th>
           </tr>
         </thead>
         <tbody>

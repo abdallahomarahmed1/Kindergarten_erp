@@ -16,6 +16,9 @@
   * {
     font-family: 'Noto Sans Arabic', sans-serif;
   }
+  a {
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
@@ -63,7 +66,7 @@
               </li>
                 <li class="nav-item"><a href="{% url 'app:paid' %}" class="nav-link">الارباح</a></li>
                 <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link">تسجيل الخروج</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">حسابي</a></li>
+                <li class="nav-item"><a href="{% url 'app:profile' %}" class="nav-link">حسابي</a></li>
             </ul>
         </div>
     </div>

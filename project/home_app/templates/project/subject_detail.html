@@ -2,14 +2,22 @@
 {% block body %}
 <div class="container mt-4">
     {% for subject in subject %}
-    <div class="row">
+    <!-- <div class="row">
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">اسم المادة:</span>{{subject}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">الدرجة النهائية:</span>{{subject.daraja}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">التاريخ:</span>{{subject.date|date:"j/n/Y"}}</h2>
-    </div>
-    <div class="row" style="margin-top: 380px;">
-        <div class="col-6"><a href="{% url 'app:edit_subject'  subject.id %}" class="btn btn-primary">تعديل مادة</a></div>
-        <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_subject'  subject.id %}" class="btn btn-danger">حذف مادة</a></div>
+    </div> -->
+    
+    <center><div class="card text-white bg-dark mb-3 text-center" style="width: 18rem; margin-top: 10%;">
+        <div class="card-body ">
+            <h4 class="card-title"><span class="text-info">المادة: </span>{{subject}}</h4>
+            <h4 class="card-title"><span class="text-info">الدرجة النهائية: </span>{{subject.daraja}}</h4>
+            <h4 class="card-title"><span class="text-info">التاريخ: </span>{{subject.date|date:"j/n/Y"}}</h4>
+        </div>
+    </div></center>
+    <div class="text-center">
+        <a href="{% url 'app:edit_subject'  subject.id %}" class="btn btn-primary">تعديل مادة</a>
+        <a href="{% url 'app:delete_subject'  subject.id %}" class="btn btn-danger">حذف مادة</a>
     </div>
     {% endfor %}
 </div>

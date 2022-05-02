@@ -1,6 +1,6 @@
 {% comment %} {% load crispy_forms_tags %} {% endcomment %}
-{% load bootstrap4  %}
 {% load static %}
+{% load bootstrap4  %}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
     <head>
@@ -67,7 +67,7 @@
               </li>
                 <li class="nav-item"><a href="{% url 'app:paid' %}" class="nav-link">الارباح</a></li>
                 <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link">تسجيل الخروج</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">حسابي</a></li>
+                <li class="nav-item"><a href="{% url 'app:profile' %}" class="nav-link">حسابي</a></li>
             </ul>
         </div>
     </div>

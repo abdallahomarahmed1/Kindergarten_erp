@@ -57,7 +57,7 @@ class darajat_form(forms.ModelForm):
     class Meta:
         model = darajat
         fields = '__all__'
-        exclude = ('user',)
+        exclude = ('user','profile')
 
 class mawad_form(forms.ModelForm):
     add_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))

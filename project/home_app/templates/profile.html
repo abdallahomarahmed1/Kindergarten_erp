@@ -1,9 +1,24 @@
-الاسم: {{profile}}
-<br>
-الايميل: {{profile.user.email}}
-<br>
-رقم الهاتف: {{profile.phone_number}}
-<br>
-العنوان: {{profile.city}}
-<br>
-الصورة: <img src="{{profile.img.url}}" alt="">
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    .imgs{
+        width:250px;
+        height:250px;
+        object-fit:cover;
+        border-radius:50%;
+    };
+</style>
+<div class="text-lg-start text-center text-xl-start text-md-start">
+    <div class="container mt-5 ">
+        <div class="row">
+            <div class="col-12 text-sm-center"><img src="{{profile.img.url}}" class="imgs"></div>
+            <div class="col-12 col-lg-6"> <h4><span class="text-info"> اسم المستخدم: </span>{{profile}}</h4></div>
+            <div class="col"><h4><span class="text-info"> الايميل: </span>{{profile.user.email}}</h4></div>
+            <div class="col-12 col-lg-6"> <h4><span class="text-info"> اسم الروضة: </span>{{profile.name}}</h4></div>
+            <div class="col-12 col-lg-6"> <h4><span class="text-info"> العنوان: </span>{{profile.city}}</h4></div>
+            <div class="col-12 col-lg-6"><h4><span class="text-info"> رقم الهاتف: </span>{{profile.phone_number}}</h4></div>
+            <div class="col"><h4>الباقة : 300جنيه</h4></div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

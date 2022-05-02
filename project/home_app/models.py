@@ -159,6 +159,7 @@ class mawad(models.Model):
 
 class darajat(models.Model):
     user = models.ForeignKey(User, verbose_name=("المستخدم"), on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, verbose_name=("profile"), on_delete=models.CASCADE)
     name = models.ForeignKey(boy, verbose_name=("اسم الطالب"), on_delete=models.CASCADE, null=True)
     mada = models.ForeignKey(mawad, verbose_name=("المادة"), on_delete=models.CASCADE)
     daraja = models.IntegerField(verbose_name='درجة الطالب')
@@ -200,7 +201,7 @@ class darajat(models.Model):
     def nesba(self):
         self_darajat = self.ejmale()
         total = self.total()
-        return self_darajat / total
+        return int((100 *self_darajat) / total)
     def __str__(self):
         return str(self.name)
 

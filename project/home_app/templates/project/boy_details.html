@@ -1,26 +1,49 @@
-{% extends 'short_base.html' %}
+{% extends 'base.html' %}
 {% block body %}
+<div class="align-items-center text-lg-start text-center text-xl-start text-md-start">
 <div class="container mt-4">
+    <style>
+        .border {
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 20px;
+            background-color: #343a40;
+            color: #fff;
+        }
+        img{
+            width:250px;
+            height:250px;
+            object-fit:cover;
+            border-radius:50%;
+        };
+        @media print {
+        .btn{
+            display: none;
+        }
+    </style>
     {% for boy in boy %}
-    <div class="row"> 
-        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">الإسم:<span class="text-info">{{boy.name}}</span></h2>
-        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">السن:<span class="text-info">{{boy.age}}</span></h2>
-        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">الفصل:<span class="text-info">{{boy.boy_class}}</span></h2>
-        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">الرقم القومي:<span class="text-info">{{boy.number_kawme}}</span></h2>
-        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">رقم الهاتف:<span class="text-info">{{boy.number_phone}}</span></h2>
-        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6">التاريخ:<span class="text-info">{{boy.date|date:"j/n/Y"}}</span></h2>
-    <center>
-        {% if boy.image %}
-        <h2 class="col-xl-12"><img src="{{boy.image.url}}" class="img-responsive" height="250px" width="250px"></h2>
-        {% endif %}
-    </center>
+    {% if boy.image %}
+        <center><h2 class="col-xl-12"><img src="{{boy.image.url}}" class="img-responsive" height="250px" width="250px"></h2></center>
+    {% endif %}
+    <div class="row border"> 
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">الإسم:<span class="text-info">{{boy.name}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">السن:<span class="text-info">{{boy.age}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">الفصل:<span class="text-info">{{boy.boy_class}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">الرقم القومي:<span class="text-info">{{boy.number_kawme}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">رقم الهاتف:<span class="text-info">{{boy.number_phone}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">المبلغ المدفوع:<span class="text-info">{{boy.paid}}</span></h2>
+        <h2 class="col-xl-4 col-sm-12 col-md-6 col-lg-6 col-xl-6">التاريخ:<span class="text-info">{{boy.date|date:"j/n/Y"}}</span></h2>
     </div>
-    <div class="row" style="margin-top: 340px;"> 
+    <div class="row mt-3"> 
         <div class="col-6"><a href="{% url 'app:Boy_edit'  boy.id %}" class="btn btn-primary">تعديل معلومات الطفل</a></div>
         <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_boy'  boy.id %}" class="btn btn-danger">حذف معلومات الطفل</a></div>
     </div>
     {% endfor %}
-    
+    <div class="row">
+        <div class="col text-center">
+          <button onclick="window.print();" class="btn btn-info col-4">طباعة الطالب</button>
+        </div>
+    </div>
 </div>
-
+</div>
 {% endblock %}

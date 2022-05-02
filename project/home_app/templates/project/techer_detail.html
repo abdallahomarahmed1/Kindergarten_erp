@@ -1,22 +1,40 @@
 {% extends 'short_base.html' %}
 {% block body %}
 <div class="container mt-4">
+    <style>
+        .border {
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 10%;
+            background-color: #343a40;
+            color: #fff;
+        }
+        @media print {
+        .btn{
+            display: none;
+        }
+    </style>
     {% for techer in techer %}
-    <div class="row">
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-5"><span class="text-info">الإسم:</span>{{techer}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-3"><span class="text-info">السن:</span>{{techer.age}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">المؤهل:</span>{{techer.qualification}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-5"><span class="text-info">الرقم القومي:</span>{{techer.number_kawme}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-3"><span class="text-info">الراتب:</span>{{techer.Salary}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">الراتب السنوي:</span>{{techer.rateb}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-5"><span class="text-info">رقم الهاتف:</span>{{techer.number_phone}}</h2>
-        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-3"><span class="text-info">التاريخ:</span>{{techer.date|date:"j/n/Y"}}</h2>
+    <div class="row border">
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الإسم:</span>{{techer}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">السن:</span>{{techer.age}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">المؤهل:</span>{{techer.qualification}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الرقم القومي:</span>{{techer.number_kawme}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الراتب:</span>{{techer.Salary}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">الراتب السنوي:</span>{{techer.rateb}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">رقم الهاتف:</span>{{techer.number_phone}}</h2>
+        <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6"><span class="text-info">التاريخ:</span>{{techer.date|date:"j/n/Y"}}</h2>
     </div>
-    <div class="row" style="margin-top: 300px;"> 
-        <div class="col-6"><a href="{% url 'app:edit_techer'  techer.id %}" class="btn btn-primary">تعديل بانات المعلم</a></div>
+    <div class="row mt-3"> 
+        <div class="col-6"><a href="{% url 'app:edit_techer'  techer.id %}" class="btn btn-primary">تعديل بيانات المعلم</a></div>
         <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_techer'  techer.id %}" class="btn btn-danger">حذف المعلم</a></div>
     </div>
 </div>
-
+<div class="row">
+    <div class="col text-center">
+      <button onclick="window.print();" class="btn btn-info col-4">طباعة المعلم</button>
+    </div>
+</div>
 {% endfor %}
 {% endblock %}
