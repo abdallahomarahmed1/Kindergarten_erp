@@ -40,7 +40,7 @@ class boy(models.Model):
     number_kawme = models.IntegerField(verbose_name="الرقم القومي")
     number_phone = models.IntegerField(verbose_name="رقم الوالد او الوالدة")
     image = models.ImageField(upload_to="boys_images/", verbose_name="صورة الطفل", blank=True, null=True)
-    paid = models.IntegerField(verbose_name='المبلغ المدفع')
+    paid = models.IntegerField(verbose_name='المبلغ المدفوع')
     date = models.DateTimeField(auto_now=True, verbose_name="التاريخ")
     add_date = models.DateField(auto_now=False,auto_now_add=False,verbose_name="التاريخ",null=True,blank=True)
     def __str__(self):

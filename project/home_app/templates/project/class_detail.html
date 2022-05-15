@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 {% block body %}
+<style>
+    .border {
+        border: 2px solid #000;
+        border-radius: 12px;
+        padding: 20px;
+        {% comment %} margin-top: 10%; {% endcomment %}
+        background-color: #343a40;
+        color: #fff;
+    }
+    @media print {
+    .btn{
+        display: none;
+    }
+</style>
 <div class="container mt-4">
     {% for class in class %}
-    <div class="row">
+    <div class="row border">
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">الإسم:</span>{{class}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">المعلمة:</span>{{class.techer}}</h2>
         <h2 class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-4"><span class="text-info">التاريخ:</span>{{class.date|date:"j/n/Y"}}</h2>
@@ -12,11 +26,19 @@
         <div class="col-6 text-end align-self-end"><a href="{% url 'app:delete_class'  class.id %}" class="btn btn-danger">حذف فصل</a></div>
     </div>
     {% endfor %}
-   <h2>الطلاب المسجلين في الفصل</h2> 
+   <center><h2>الطلاب المسجلين في الفصل</h2></center>
+   <div class="border">
+       <div class="row">
     {% for boy in boy %}
-    <div class="">
-        {{boy.name}}
-    </div>
+        <div class="col-lg-6 col-xl-6 col-md-6 col-xs-12">{{boy.name}}</div>
     {% endfor %}
+    </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col text-center">
+          <button onclick="window.print();" class="btn btn-info col-4">طباعة المعلم</button>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
