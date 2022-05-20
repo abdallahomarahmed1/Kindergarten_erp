@@ -17,7 +17,7 @@
             <button type="submit" class="btn btn-primary">بحث</button>
       </form>
       <div class="col-6 text-end align-self-end">
-        <a href="{% url 'app:add_masrof' %}" class="btn btn-primary">أضف درجات</a>
+        <a href="{% url 'app:add_darajat' %}" class="btn btn-primary">أضف درجات</a>
       </div>
     </div>
 
@@ -37,7 +37,7 @@
           
             {% for darajat in darajat %}
           <tr>
-            <th scope="row"><a href="{% url 'app:darajat_detail' darajat.id %}">{{darajat}}</a></th>
+            <th scope="row"><a href="{% url 'app:darajat_detail' darajat.profile.id darajat.id %}">{{darajat}}</a></th>
             <td>{{darajat.add_date|date:"j/n/Y"}}</td>
             <td><a href="{% url 'app:edit_darajat' darajat.id%}" class="btn btn-primary">تعديل</a></td>
             <td><a href="{% url 'app:delete_darajat' darajat.id%}" class="btn btn-danger">حذف</a></td>

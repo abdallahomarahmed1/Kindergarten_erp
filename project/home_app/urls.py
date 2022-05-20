@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import add_boy, home,boys,Boy,classs,class_detail,techeres,techer_detail,absences,paid_chart,absence_detail,driveres,driver_detail,masrofs,masrof_detail,subject,subject_detail,Transports,transports_detail,add_boy, add_techer,add_class,add_absence,add_driver,add_masrof,add_transport,add_mawad,paid,profile,edit_boy,edit_class,edit_techer,edit_absence,edit_masrof,edit_driver,edit_subject,edit_transport,edit_darajat,delete_boy,delete_class,delete_techer,delete_absences,delete_subject,delete_masrof,delete_driver,delete_darajat,delete_transport,darajats, add_darajat,darajat_detail
+from .views import add_boy,new_darajat, home,boys,Boy,print_all_darajat,classs,class_detail,techeres,techer_detail,absences,paid_chart,absence_detail,driveres,driver_detail,masrofs,masrof_detail,subject,subject_detail,Transports,transports_detail,add_boy, add_techer,add_class,add_absence,add_driver,add_masrof,add_transport,add_mawad,paid,profile,edit_boy,edit_class,edit_techer,edit_absence,edit_masrof,edit_driver,edit_subject,edit_transport,edit_darajat,delete_boy,delete_class,delete_techer,delete_absences,delete_subject,delete_masrof,delete_driver,delete_darajat,delete_transport,darajats, add_darajat,darajat_detail
 app_name='home_app'
 urlpatterns = [
     path('', home, name='home'),
@@ -18,9 +18,10 @@ urlpatterns = [
     path('subjects/', subject, name="subjects"),
     path('subject/<int:id>', subject_detail, name="subject_detail"),
     path('darajat/', darajats, name="darajats"),
+    path('all_darajat/', print_all_darajat, name="all_darajat"),
     path('transports/', Transports, name="Transports"),
     path('transports_detail/<int:id>', transports_detail, name="transports_detail"),
-    path('darajat/<int:id>/', darajat_detail, name="darajat_detail"),
+    path('<int:profile_id>/darajat/<int:id>/', darajat_detail, name="darajat_detail"),
     path('add_boy/', add_boy, name="add_boy"),
     path('add_techer/', add_techer, name="add_techer"),
     path('add_class/', add_class, name="add_class"),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('add_masrof/', add_masrof, name="add_masrof"),
     path('add_subject/', add_mawad, name="add_subject"),
     path('add_darajat/', add_darajat, name="add_darajat"),
+    path('add_darajat/<int:profile_id>/', new_darajat, name="add_darajats"),
     path('add_transport/', add_transport, name="add_transport"),
     path('paid/', paid_chart, name="paid"),
     path('paid_chart/', paid_chart, name="paid_chart"),

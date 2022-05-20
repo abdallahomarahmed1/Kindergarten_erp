@@ -3,6 +3,7 @@
 {% block body %}
 <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<div style="display:none;">
         {% for techers in techers %}
             {% if techers.rateb != None %}
                 <p class="total_piads_techer">{{techers.rateb}}</p>
@@ -18,6 +19,7 @@
                 <p class="total_piad_masrofs">{{masrofs.price}}</p>
             {% endif %}
         {% endfor %}
+</div>
         <!--الاحصائيات-->
         <div class="content mt-5 container">
             <div class="container-fluid">
@@ -265,7 +267,7 @@
         var salary = $(this).text();
         total += parseInt(salary);
         });
-        $('#totalsalarys').text( "مجوع ما تم دفعه: " + total);
+        $('#totalsalarys').text( "الدخل: " + total);
         // مجموع ما تم دفعة للمعلمين
         var total_piad = 0;
         $('.total_piads_techer').each(function(){

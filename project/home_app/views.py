@@ -1,6 +1,5 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django_filters import filters
 from .models import boy,classes,techers,absence,Transport,driver,masrof,Profile,darajat,mawad
 from django.core.paginator import Paginator
 from .filters import BoyFilter, mawadFilter, techersFilter, absenceFilter, masrofFilter, classFilter,driverFilter, darajatFilter,Transport_Filter
@@ -122,15 +121,25 @@ def darajats(request):
     page_pbj = paginator.get_page(page_number)
     context = {'darajat':page_pbj, 'filter':filter, 'count':darajat.objects.filter(user=request.user).count()}
     return render(request, 'project/darajats.html', context)
+@login_required
+def print_all_darajat(request):
+    darajats = darajat.objects.all().order_by('add_date')
+    filter = darajatFilter(request.GET, queryset=darajats)
+    darajats =  filter.qs
+    paginator = Paginator(darajats,200)
+    page_number = request.GET.get('page')
+    page_pbj = paginator.get_page(page_number)
+    context = {'darajat':page_pbj, 'filter':filter}
+    return render(request, 'project/all_darajats.html', context)
 
 @login_required
-def darajat_detail(request, id):
-    darajat_detail = darajat.objects.filter(id=id, user=request.user)
+def darajat_detail(request, id,profile_id):
+    darajat_detail = darajat.objects.filter(id=id, user=request.user,profile=profile_id)
     return render(request, 'project/darajat_detail.html', context={'darajat':darajat_detail})
 
 @login_required
 def Transports(request):
-    Transports = Transport.objects.all().order_by('date')
+    Transports = Transport.objects.filter(user=request.user).order_by('date')
     filter = Transport_Filter(request.GET, queryset=Transports)
     Transports =  filter.qs
     paginator = Paginator(Transports,20)
@@ -258,6 +267,29 @@ def add_darajat(request):
         form.fields['mada6'].queryset = mawad.objects.filter(user=request.user)
         form.fields['mada7'].queryset = mawad.objects.filter(user=request.user)
     return render(request, 'add/darajat_form.html',{'form':form})
+@login_required
+def new_darajat(request, profile_id):
+    my_profile = Profile.objects.get(user=request.user, id=profile_id)
+    if request.method == 'POST':
+        form = darajat_form(request.POST, request.FILES)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.user = request.user
+            myform.profile = my_profile
+            myform.save()
+            return redirect(reverse('app:darajats'))
+    else:
+        form = darajat_form()
+        form.fields['name'].queryset = boy.objects.filter(user=request.user)
+        form.fields['mada'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada1'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada2'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada3'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada4'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada5'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada6'].queryset = mawad.objects.filter(user=request.user)
+        form.fields['mada7'].queryset = mawad.objects.filter(user=request.user)
+    return render(request,'project/new_darajat.html',{'form':form})
 @login_required
 def add_transport(request):
     if request.method=='POST':

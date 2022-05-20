@@ -191,9 +191,9 @@ class darajat(models.Model):
         return ejmale
     def total(self):
         ejmale = self.mada.daraja + self.mada1.daraja + self.mada2.daraja + self.mada3.daraja
-        if self.mada4.daraja:
+        if self.mada4:
             ejmale += self.mada4.daraja
-        if self.mada5.daraja:
+        if self.mada5:
             ejmale += self.mada5.daraja 
         if self.mada6:
            ejmale += self.mada6.daraja

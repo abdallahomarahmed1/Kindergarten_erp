@@ -2,13 +2,13 @@
 {% block body %}
 {% load bootstrap4  %}
 
- <div class="container">
- <h1>عدل بيانات سائق</h1>
+ <div class="container form mt-3">
+ <center><h1>عدل بيانات سائق</h1></center>
  <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% comment %} <table>{{form.as_table}}</table> {% endcomment %}
-            <button type="submit" class="btn btn-primary mt-5">تعديل</button>
+            <button type="submit" class="btn btn-primary mt-3">تعديل</button>
  </form>
  </div>
 {% endblock body %}

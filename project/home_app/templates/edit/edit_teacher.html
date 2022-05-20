@@ -2,8 +2,8 @@
 {% block body %}
 {% load bootstrap4  %}
 
- <div class="container">
- <h1>عدل بيانات معلم</h1>
+ <div class="container form mt-3">
+<center><h1>عدل بيانات معلم</h1></center>
  <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
