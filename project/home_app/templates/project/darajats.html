@@ -17,7 +17,9 @@
             <button type="submit" class="btn btn-primary">بحث</button>
       </form>
       <div class="col-6 text-end align-self-end">
-        <a href="{% url 'app:add_darajat' %}" class="btn btn-primary">أضف درجات</a>
+        {% comment %} {% for add in add %} {% endcomment %}
+        <a href="{% url 'app:add_darajats' add.profile.id  %}" class="btn btn-primary">أضف درجات</a>
+        {% comment %} {% endfor %} {% endcomment %}
       </div>
     </div>
 

@@ -8,15 +8,16 @@ from .form import boy_form, class_form, mawad_form, techer_form,absence_form,Tra
 from django.db.models import Sum
 from django.views.generic import UpdateView
 # Create your views here.
-@login_required
-def classssss(request):
+# @login_required
+def custom_filter(request):
     return classes.objects.filter(user=request.user)
 def home(request):
     return render(request, 'home/home.html')
 @login_required
 def boys(request):
     boys = boy.objects.filter(user=request.user).order_by('date')
-    filter = BoyFilter(request.GET, queryset=boys)
+    filter = BoyFilter(request.GET, queryset=boys,request=request)
+    # filter.fields['boy_class'] = classes.objects.filter(user=request.user)
     boys = filter.qs
     paginator = Paginator(boys,225)
     page_number = request.GET.get('page')
@@ -26,7 +27,7 @@ def boys(request):
 @login_required
 def classs(request):
     classs = classes.objects.filter(user=request.user).order_by('date')
-    filter = classFilter(request.GET, queryset=classs)
+    filter = classFilter(request.GET, queryset=classs,request=request)
     classs = filter.qs
     paginator = Paginator(classs,25)
     page_number = request.GET.get('page')
@@ -119,7 +120,7 @@ def darajats(request):
     paginator = Paginator(darajats,20)
     page_number = request.GET.get('page')
     page_pbj = paginator.get_page(page_number)
-    context = {'darajat':page_pbj, 'filter':filter, 'count':darajat.objects.filter(user=request.user).count()}
+    context = {'darajat':page_pbj,'add':darajat.objects.get(id=5) , 'filter':filter, 'count':darajat.objects.filter(user=request.user).count()}
     return render(request, 'project/darajats.html', context)
 @login_required
 def print_all_darajat(request):
@@ -140,7 +141,7 @@ def darajat_detail(request, id,profile_id):
 @login_required
 def Transports(request):
     Transports = Transport.objects.filter(user=request.user).order_by('date')
-    filter = Transport_Filter(request.GET, queryset=Transports)
+    filter = Transport_Filter(request.GET, queryset=Transports,request=request)
     Transports =  filter.qs
     paginator = Paginator(Transports,20)
     page_number = request.GET.get('page')
@@ -247,29 +248,8 @@ def add_mawad(request):
     return render(request, 'add/mawad_form.html',{'form':form})
 
 @login_required
-def add_darajat(request):
-    if request.method=='POST':
-        form = darajat_form(request.POST, request.FILES)
-        if form.is_valid():
-            myform = form.save(commit=False)
-            myform.user = request.user
-            myform.save()
-            return redirect(reverse('app:darajats'))
-    else:
-        form = darajat_form()
-        form.fields['name'].queryset = boy.objects.filter(user=request.user)
-        form.fields['mada'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada1'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada2'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada3'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada4'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada5'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada6'].queryset = mawad.objects.filter(user=request.user)
-        form.fields['mada7'].queryset = mawad.objects.filter(user=request.user)
-    return render(request, 'add/darajat_form.html',{'form':form})
-@login_required
 def new_darajat(request, profile_id):
-    my_profile = Profile.objects.get(user=request.user, id=profile_id)
+    my_profile = Profile.objects.filter(id=profile_id,user=request.user)
     if request.method == 'POST':
         form = darajat_form(request.POST, request.FILES)
         if form.is_valid():

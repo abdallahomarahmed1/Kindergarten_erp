@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import add_boy,new_darajat, home,boys,Boy,print_all_darajat,classs,class_detail,techeres,techer_detail,absences,paid_chart,absence_detail,driveres,driver_detail,masrofs,masrof_detail,subject,subject_detail,Transports,transports_detail,add_boy, add_techer,add_class,add_absence,add_driver,add_masrof,add_transport,add_mawad,paid,profile,edit_boy,edit_class,edit_techer,edit_absence,edit_masrof,edit_driver,edit_subject,edit_transport,edit_darajat,delete_boy,delete_class,delete_techer,delete_absences,delete_subject,delete_masrof,delete_driver,delete_darajat,delete_transport,darajats, add_darajat,darajat_detail
+from .views import add_boy,new_darajat, home,boys,Boy,print_all_darajat,classs,class_detail,techeres,techer_detail,absences,paid_chart,absence_detail,driveres,driver_detail,masrofs,masrof_detail,subject,subject_detail,Transports,transports_detail,add_boy, add_techer,add_class,add_absence,add_driver,add_masrof,add_transport,add_mawad,paid,profile,edit_boy,edit_class,edit_techer,edit_absence,edit_masrof,edit_driver,edit_subject,edit_transport,edit_darajat,delete_boy,delete_class,delete_techer,delete_absences,delete_subject,delete_masrof,delete_driver,delete_darajat,delete_transport,darajats,darajat_detail
 app_name='home_app'
 urlpatterns = [
     path('', home, name='home'),
@@ -29,7 +29,6 @@ urlpatterns = [
     path('add_driver/', add_driver, name="add_driver"),
     path('add_masrof/', add_masrof, name="add_masrof"),
     path('add_subject/', add_mawad, name="add_subject"),
-    path('add_darajat/', add_darajat, name="add_darajat"),
     path('add_darajat/<int:profile_id>/', new_darajat, name="add_darajats"),
     path('add_transport/', add_transport, name="add_transport"),
     path('paid/', paid_chart, name="paid"),

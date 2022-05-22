@@ -109,8 +109,8 @@
                     <div class="col-2"><img src="{% static 'img/image-removebg-preview.png' %}" alt="" srcset=""></div>
                     <div class="col-2"><img src="{% static 'img/image-removebg-preview (1).png' %}" alt="" srcset=""></div>
                     <div class="col-2"><img src="{% static 'img/image-removebg-preview (4).png' %}" alt="" srcset=""></div>
-                    <div class="col-2"><img src="{{darajat.profile.img.url}}" style="height: 150px;width: 150px;border-radius:50%;" alt="" srcset=""></div>
-                    <div class="col"><h4><span style="color: rgb(17, 0, 255);">إشراف:</span><span style="color: rgba(255, 0, 0, 0.842);">{{darajat.profile.name_of_admin}}</span></h4></div>
+                    <div class="col-2"><img src="{{request.user.profile.img.url}}" style="height: 150px;width: 150px;border-radius:50%;" alt="" srcset=""></div>
+                    <div class="col"><h4><span style="color: rgb(17, 0, 255);">إشراف:</span><span style="color: rgba(255, 0, 0, 0.842);">{{request.user.profile.name_of_admin}}</span></h4></div>
                   </div>
                   {% comment %} </div>   {% endcomment %}
                 </div>  
